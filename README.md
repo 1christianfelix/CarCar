@@ -2,8 +2,8 @@
 
 Team:
 
-- Christian Felix - Sales
 - Brandon Moore - Services
+- Christian Felix - Sales
 
 ## Design
 
