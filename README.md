@@ -2,8 +2,8 @@
 
 Team:
 
-* Person 1 - Which microservice?
-* Person 2 - Which microservice?
+- Christian Felix - Sales
+- Brandon Moore - Services
 
 ## Design
 
