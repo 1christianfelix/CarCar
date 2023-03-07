@@ -24,20 +24,6 @@ class AutomobileVOEncoder(ModelEncoder):
     ]
 
 
-class Sales_RecordEncoder(ModelEncoder):
-    model = Sale_Record
-    properties = [
-        "sale_price",
-        "sale_person",
-        "customer",
-        "automobile",
-    ]
-
-    encoders = {
-        "automobile": AutomobileVOEncoder(),
-    }
-
-
 class Sales_PersonEncoder(ModelEncoder):
     model = Sales_Person
     properties = [
@@ -53,6 +39,22 @@ class CustomerEncoder(ModelEncoder):
         'address',
         'phone_number',
     ]
+
+
+class Sales_RecordEncoder(ModelEncoder):
+    model = Sale_Record
+    properties = [
+        "sale_price",
+        "sales_person",
+        "customer",
+        "automobile",
+    ]
+
+    encoders = {
+        "automobile": AutomobileVOEncoder(),
+        "sales_person": Sales_PersonEncoder(),
+        "customer": CustomerEncoder(),
+    }
 
 # endregion
 
