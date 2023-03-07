@@ -21,7 +21,7 @@ class AutomobileVOEncoder(ModelEncoder):
         'color',
         'year',
         'vin',
-        "for_sale",
+        "sold",
     ]
 
 
@@ -163,18 +163,25 @@ def api_sales_records(request):
         try:
             content = json.loads(request.body)
             automobile = AutomobileVO.objects.get(
-                import_href=content['automobile'])
+                vin=content['automobile'])
+
+            if automobile.sold == True:
+                return JsonResponse(
+                    {"Message" : "Cannot sell. Car already sold."}
+                )
+
             sales_person = Sales_Person.objects.get(
                 name=content["sales_person"])
             customer = Customer.objects.get(name=content["customer"])
+
+            automobile.sold = True
+            automobile.save();
 
             content['automobile'] = automobile
             content['sales_person'] = sales_person
             content['customer'] = customer
 
             # Selling the automobile
-            automobile.for_sale = False
-            automobile.save();
             sales_record = Sale_Record.objects.create(**content)
             return JsonResponse(
                 sales_record, encoder=Sales_RecordEncoder, safe=False
