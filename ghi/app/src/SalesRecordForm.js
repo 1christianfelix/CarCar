@@ -99,7 +99,7 @@ const SalesRecordForm = (props) => {
                 <option value="">Choose an automobile</option>
                 {automobiles.map((automobile) => {
                   return (
-                    <option key={automobile["href"]} value={automobile["href"]}>
+                    <option key={automobile["vin"]} value={automobile["vin"]}>
                       {automobile.name} {automobile.year}{" "}
                       {automobile.model.manufacturer.name}{" "}
                       {automobile.model.name} - {automobile.color}
