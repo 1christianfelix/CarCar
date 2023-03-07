@@ -24,13 +24,6 @@ class vo_encoder(ModelEncoder):
     ]
 
 
-class Sales_PersonListEncoder(ModelEncoder):
-    model = Sales_Person
-    properties = [
-        'name',
-    ]
-
-
 class Sales_PersonDetailEncoder(ModelEncoder):
     model = Sales_Person
     properties = [
@@ -48,7 +41,7 @@ def api_list_sales_people(request):
     # GET
     if request.method == "GET":
         sales_people = Sales_Person.objects.all()
-        return JsonResponse({'sales_people': sales_people}, encoder=Sales_PersonListEncoder, safe=False)
+        return JsonResponse({'sales_people': sales_people}, encoder=Sales_PersonDetailEncoder, safe=False)
 
     # POST
     else:
