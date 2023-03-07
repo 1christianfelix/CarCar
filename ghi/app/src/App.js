@@ -8,7 +8,7 @@ import SalesRecordForm from "./SalesRecordForm";
 import SalesRecordList from "./SalesRecordList";
 
 function App(props) {
-  // Reference to data
+  // Reference to inventory lsit
   const manufacturer_list = props.manufacturerData["manufacturers"];
   const vehicle_list = props.vehicleData["models"];
   const automobile_list = props.automobileData["autos"];

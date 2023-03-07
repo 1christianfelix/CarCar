@@ -124,7 +124,7 @@ def api_customers(request):
         except TypeError as e:
             invalid_arg = str(e).split("'")[1]
             return JsonResponse(
-                {"Invalid argument": f'Cannot create customer with argument: ({invalid_arg})'}, status=400
+                {"message": f'Cannot create customer with argument: ({invalid_arg})'}, status=400
             )
 
 
@@ -167,7 +167,7 @@ def api_sales_records(request):
 
             if automobile.sold == True:
                 return JsonResponse(
-                    {"Message" : "Cannot sell. Car already sold."}
+                    {"message" : "Cannot sell. Car already sold."}, status=400
                 )
 
             sales_person = Sales_Person.objects.get(
@@ -189,17 +189,17 @@ def api_sales_records(request):
 
         except AutomobileVO.DoesNotExist:
             return JsonResponse(
-                {'Invalid argument': 'Automobile reference does not exist'},
+                {'message': 'Automobile reference does not exist'},
                 status=400
             )
         except Sales_Person.DoesNotExist:
             return JsonResponse(
-                {'Invalid argument': 'Sales_Person does not exist'},
+                {'message': 'Sales_Person does not exist'},
                 status=400
             )
         except Customer.DoesNotExist:
             return JsonResponse(
-                {'Invalid argument': 'Customer does not exist'},
+                {'message': 'Customer does not exist'},
                 status=400
             )
 

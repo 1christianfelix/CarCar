@@ -6,6 +6,8 @@ const SalesRecordForm = (props) => {
   const [automobiles, setAutomobiles] = useState(props.automobile_list);
   const [salesPersons, setSalesPersons] = useState([]);
   const [customers, setCustomers] = useState([]);
+  const [warning, setWarning] = useState('');
+  const [alert, setAlert] = useState('d-none');
 
 
   // Fetcing SalesPersons and Customers list
@@ -52,6 +54,7 @@ const SalesRecordForm = (props) => {
   //#endregion
 
   //#region : submission handler
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {
@@ -69,6 +72,7 @@ const SalesRecordForm = (props) => {
       },
     };
 
+
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
       const test1 = await response.json();
@@ -77,96 +81,106 @@ const SalesRecordForm = (props) => {
       setSalesPerson("");
       setCustomer("");
       setSalePrice("");
+      setWarning("")
+      setAlert("alert alert-info offset-3 col-6 mb-0 text-center")
+    }
+    else {
+      let responseMessage = await response.json();
+      setAlert("alert alert-danger offset-3 col-6 mb-0 text-center")
+      setWarning(responseMessage.message)
     }
   };
   //#endregion
 
   return (
-    <div className="row">
-      <div className="offset-3 col-6">
-        <div className="shadow p-4 mt-4">
-          <h1 className="mb-3">Record a new sale</h1>
-          <form onSubmit={handleSubmit} id="create-sales-person-form">
-            <div className="mb-3">
-              <select
-                required
-                name="automobile"
-                id="automobile"
-                className="form-select"
-                value={automobile}
-                onChange={handleAutomobile}
-              >
-                <option value="">Choose an automobile</option>
-                {automobiles.map((automobile) => {
-                  return (
-                    <option key={automobile["vin"]} value={automobile["vin"]}>
-                      {automobile.name} {automobile.year}{" "}
-                      {automobile.model.manufacturer.name}{" "}
-                      {automobile.model.name} - {automobile.color}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-            <div className="mb-3">
-              <select
-                required
-                name="sales_person"
-                id="sales_person"
-                className="form-select"
-                value={salesPerson}
-                onChange={handleSalesPerson}
-              >
-                <option value="">Choose a sales person</option>
-                {salesPersons.map((salesPerson) => {
-                  return (
-                    <option
-                      key={salesPerson["href"]}
-                      value={salesPerson["name"]}
-                    >
-                      {salesPerson.name}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-            <div className="mb-3">
-              <select
-                required
-                name="customer"
-                id="customer"
-                className="form-select"
-                value={customer}
-                onChange={handleCustomer}
-              >
-                <option value="">Choose a customer</option>
-                {customers.map((customer) => {
-                  return (
-                    <option key={customer["href"]} value={customer["name"]}>
-                      {customer.name}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-            <div className="form-floating mb-3">
-              <input
-                name="sale_price"
-                placeholder="Sale Price"
-                required
-                type="number"
-                id="sale_price"
-                className="form-control"
-                value={salePrice}
-                onChange={handleSalePrice}
-              />
-              <label htmlFor="sale_price">Sale Price</label>
-            </div>
-            <button className="btn btn-primary">Create</button>
-          </form>
+      <div className="row">
+        <div className={alert} role="alert">
+          {warning}
+        </div>
+        <div className="offset-3 col-6">
+          <div className="shadow p-4 mt-4">
+            <h1 className="mb-3">Record a new sale</h1>
+            <form onSubmit={handleSubmit} id="create-sales-person-form">
+              <div className="mb-3">
+                <select
+                  required
+                  name="automobile"
+                  id="automobile"
+                  className="form-select"
+                  value={automobile}
+                  onChange={handleAutomobile}
+                >
+                  <option value="">Choose an automobile</option>
+                  {automobiles.map((automobile) => {
+                    return (
+                      <option key={automobile["vin"]} value={automobile["vin"]}>
+                        {automobile.name} {automobile.year}{" "}
+                        {automobile.model.manufacturer.name}{" "}
+                        {automobile.model.name} - {automobile.color}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+              <div className="mb-3">
+                <select
+                  required
+                  name="sales_person"
+                  id="sales_person"
+                  className="form-select"
+                  value={salesPerson}
+                  onChange={handleSalesPerson}
+                >
+                  <option value="">Choose a sales person</option>
+                  {salesPersons.map((salesPerson) => {
+                    return (
+                      <option
+                        key={salesPerson["href"]}
+                        value={salesPerson["name"]}
+                      >
+                        {salesPerson.name}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+              <div className="mb-3">
+                <select
+                  required
+                  name="customer"
+                  id="customer"
+                  className="form-select"
+                  value={customer}
+                  onChange={handleCustomer}
+                >
+                  <option value="">Choose a customer</option>
+                  {customers.map((customer) => {
+                    return (
+                      <option key={customer["href"]} value={customer["name"]}>
+                        {customer.name}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+              <div className="form-floating mb-3">
+                <input
+                  name="sale_price"
+                  placeholder="Sale Price"
+                  required
+                  type="number"
+                  id="sale_price"
+                  className="form-control"
+                  value={salePrice}
+                  onChange={handleSalePrice}
+                />
+                <label htmlFor="sale_price">Sale Price</label>
+              </div>
+              <button className="btn btn-primary">Create</button>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
   );
 };
 
