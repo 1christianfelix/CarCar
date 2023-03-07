@@ -39,5 +39,11 @@ class Sale_Record(models.Model):
     custom = models.ForeignKey(
         Customer,
         related_name='sale_record',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+    )
+
+    automobile = models.ForeignKey(
+        AutomobileVO,
+        related_name="sale_record",
+        on_delete=models.CASCADE,
     )
