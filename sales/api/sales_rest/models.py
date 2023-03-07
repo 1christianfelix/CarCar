@@ -32,6 +32,12 @@ class Customer(models.Model):
     address = models.CharField(max_length=200)
     phone_number = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.name
+
+    def get_api_url(self):
+        return reverse('api_show_customer', kwargs={'id': self.id})
+
 
 class Sale_Record(models.Model):
     sale_price = models.CharField(max_length=200)

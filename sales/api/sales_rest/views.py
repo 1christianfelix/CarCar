@@ -14,7 +14,7 @@ from .models import (
 
 #region : Encoders
 
-class vo_encoder(ModelEncoder):
+class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
     properties = [
         'import_href',
@@ -22,6 +22,20 @@ class vo_encoder(ModelEncoder):
         'year',
         'vin',
     ]
+
+
+class Sales_RecordEncoder(ModelEncoder):
+    model = Sale_Record
+    properties = [
+        "sale_price",
+        "sale_person",
+        "customer",
+        "automobile",
+    ]
+
+    encoders = {
+        "automobile": AutomobileVOEncoder(),
+    }
 
 
 class Sales_PersonEncoder(ModelEncoder):
@@ -65,6 +79,19 @@ def api_list_sales_people(request):
         return JsonResponse(sales_person, encoder=Sales_PersonEncoder, safe=False)
 
 
+@require_http_methods(["GET", "DELETE"])
+def api_show_sales_person(request, id):
+    # GET
+    if request.method == "GET":
+        sales_person = Sales_Person.objects.get(id=id)
+        return JsonResponse(sales_person, encoder=Sales_PersonEncoder, safe=False)
+
+    # DELETE
+    else:
+        count, _ = Sales_Person.objects.filter(id=id).delete()
+        return JsonResponse({'Deleted': count > 0})
+
+
 @require_http_methods(["GET", "POST"])
 def api_list_customers(request):
     # GET
@@ -85,10 +112,52 @@ def api_list_customers(request):
         return JsonResponse(customer, encoder=CustomerEncoder, safe=False)
 
 
+@require_http_methods(["GET", "POST"])
+def api_list_sales_record(request):
+    # GET
+    if request.method == "GET":
+        sales_record = Sale_Record.objects.all()
+        return JsonResponse({'sales_records': sales_record}, encoder=Sales_RecordEncoder, safe=False)
+
+    # POST
+    else:
+        try:
+            content = json.loads(request.body)
+            automobile = AutomobileVO.objects.get(
+                import_href=content['automobile'])
+            sales_person = Sales_Person.objects.get(
+                name=content["sales_person"])
+            customer = Customer.objects.get(name=content["customer"])
+
+            content['automobile'] = automobile
+            content['sales_person'] = sales_person
+            content['customer'] = customer
+
+        except AutomobileVO.DoesNotExist:
+            return JsonResponse(
+                {'Invalid argument': 'Automobile reference does not exist'},
+                status=400
+            )
+        except Sales_Person.DoesNotExist:
+            return JsonResponse(
+                {'Invalid argument': 'Sales_Person does not exist'},
+                status=400
+            )
+        except Customer.DoesNotExist:
+            return JsonResponse(
+                {'Invalid argument': 'Customer does not exist'},
+                status=400
+            )
+
+        sales_record = Sale_Record.objects.create(**content)
+        return JsonResponse(
+            sales_record, encoder=Sales_RecordEncoder, safe=False
+        )
 # endregion
 
-
 # Test API DELETE-LATER
+
+
 def api_automobile(request):
     vo = AutomobileVO.objects.all()
-    return JsonResponse({'vo': vo}, encoder=vo_encoder, safe=False)
+    return JsonResponse({'vo': vo}, encoder=AutomobileVOEncoder, safe=False)
