@@ -21,6 +21,7 @@ class AutomobileVOEncoder(ModelEncoder):
         'color',
         'year',
         'vin',
+        "for_sale",
     ]
 
 
@@ -171,6 +172,9 @@ def api_sales_records(request):
             content['sales_person'] = sales_person
             content['customer'] = customer
 
+            # Selling the automobile
+            automobile.for_sale = False
+            automobile.save();
             sales_record = Sale_Record.objects.create(**content)
             return JsonResponse(
                 sales_record, encoder=Sales_RecordEncoder, safe=False

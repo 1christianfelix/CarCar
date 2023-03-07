@@ -17,21 +17,21 @@ urlpatterns = [
     path(
         "sales_person/",
         api_sales_persons,
-        name="api_list_sales_persons"),
+        name="api_sales_persons"),
     path(
         "sales_person/<int:id>/",
         api_sales_person,
-        name="api_show_sales_person"),
+        name="api_sales_person"),
 
     # Customer
     path(
         "customer/",
         api_customers,
-        name="api_list_customers"),
+        name="api_customers"),
     path(
         "customer/<int:id>/",
         api_customer,
-        name="api_list_customer"),
+        name="api_customer"),
 
     # Sales_Record
     path(

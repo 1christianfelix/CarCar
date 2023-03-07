@@ -1,4 +1,3 @@
-from sales_rest.models import AutomobileVO
 import django
 import os
 import sys
@@ -12,6 +11,7 @@ django.setup()
 
 # Import models from sales_rest, here.
 # from sales_rest.models import Something
+from sales_rest.models import AutomobileVO
 
 
 def poll():
