@@ -42,7 +42,7 @@ class Sale_Record(models.Model):
         on_delete=models.CASCADE,
     )
 
-    custom = models.ForeignKey(
+    customer = models.ForeignKey(
         Customer,
         related_name='sale_record',
         on_delete=models.CASCADE,

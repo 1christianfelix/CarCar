@@ -54,8 +54,14 @@ def api_list_sales_people(request):
 
     # POST
     else:
-        content = json.loads(request.body)
-        sales_person = Sales_Person.objects.create(**content)
+        try:
+            content = json.loads(request.body)
+            sales_person = Sales_Person.objects.create(**content)
+        except TypeError as e:
+            invalid_arg = str(e).split("'")[1]
+            return JsonResponse(
+                {"Invalid argument": f'Cannot create sales_person with argument: ({invalid_arg})'}, status=400
+            )
         return JsonResponse(sales_person, encoder=Sales_PersonEncoder, safe=False)
 
 
@@ -68,9 +74,16 @@ def api_list_customers(request):
 
     # POST
     else:
-        content = json.loads(request.body)
-        customer = Customer.objects.create(**content)
+        try:
+            content = json.loads(request.body)
+            customer = Customer.objects.create(**content)
+        except TypeError as e:
+            invalid_arg = str(e).split("'")[1]
+            return JsonResponse(
+                {"Invalid argument": f'Cannot create customer with argument: ({invalid_arg})'}, status=400
+            )
         return JsonResponse(customer, encoder=CustomerEncoder, safe=False)
+
 
 # endregion
 
