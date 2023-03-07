@@ -24,11 +24,20 @@ class vo_encoder(ModelEncoder):
     ]
 
 
-class Sales_PersonDetailEncoder(ModelEncoder):
+class Sales_PersonEncoder(ModelEncoder):
     model = Sales_Person
     properties = [
         'name',
         'employee_number'
+    ]
+
+
+class CustomerEncoder(ModelEncoder):
+    model = Customer
+    properties = [
+        'name',
+        'address',
+        'phone_number',
     ]
 
 # endregion
@@ -41,14 +50,27 @@ def api_list_sales_people(request):
     # GET
     if request.method == "GET":
         sales_people = Sales_Person.objects.all()
-        return JsonResponse({'sales_people': sales_people}, encoder=Sales_PersonDetailEncoder, safe=False)
+        return JsonResponse({'sales_people': sales_people}, encoder=Sales_PersonEncoder, safe=False)
 
     # POST
     else:
         content = json.loads(request.body)
         sales_person = Sales_Person.objects.create(**content)
-        return JsonResponse(sales_person, encoder=Sales_PersonDetailEncoder, safe=False)
+        return JsonResponse(sales_person, encoder=Sales_PersonEncoder, safe=False)
 
+
+@require_http_methods(["GET", "POST"])
+def api_list_customers(request):
+    # GET
+    if request.method == "GET":
+        customers = Customer.objects.all()
+        return JsonResponse({'customers': customers}, encoder=CustomerEncoder, safe=False)
+
+    # POST
+    else:
+        content = json.loads(request.body)
+        customer = Customer.objects.create(**content)
+        return JsonResponse(customer, encoder=CustomerEncoder, safe=False)
 
 # endregion
 
