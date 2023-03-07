@@ -74,7 +74,7 @@ const SalesPersonForm = () => {
               />
               <label htmlFor="employee_number">Employee Number</label>
             </div>
-            <button className="btn btn-primary">Create</button>
+            <button className="btn btn-primary">Add</button>
           </form>
         </div>
       </div>

@@ -4,8 +4,15 @@ import Nav from "./Nav";
 
 import SalesPersonForm from "./SalesPersonForm";
 import CustomerForm from "./CustomerForm";
+import SalesRecordForm from "./SalesRecordForm";
+import SalesRecordList from "./SalesRecordList";
 
-function App() {
+function App(props) {
+  // Reference to data
+  const manufacturer_list = props.manufacturerData["manufacturers"];
+  const vehicle_list = props.vehicleData["models"];
+  const automobile_list = props.automobileData["autos"];
+
   return (
     <BrowserRouter>
       <Nav />
@@ -17,6 +24,13 @@ function App() {
           </Route>
           <Route path="customer">
             <Route index element={<CustomerForm />} />
+          </Route>
+          <Route path="sales_record">
+            <Route index element={<SalesRecordList />} />
+            <Route
+              path="new"
+              element={<SalesRecordForm automobile_list={automobile_list} />}
+            />
           </Route>
         </Routes>
       </div>
