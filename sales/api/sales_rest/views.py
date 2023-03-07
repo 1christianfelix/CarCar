@@ -96,8 +96,15 @@ def api_sales_person(request, id):
 
     # DELETE
     else:
-        count, _ = Sales_Person.objects.filter(id=id).delete()
-        return JsonResponse({'Deleted': count > 0})
+        try:
+            count, _ = Sales_Person.objects.get(id=id).delete()
+            return JsonResponse({'Deleted': count > 0})
+
+        except Sales_Person.DoesNotExist:
+            return JsonResponse(
+                {'message': 'Invalid sales_person id'},
+                status=400
+            )
 
 
 @require_http_methods(["GET", "POST"])
@@ -133,8 +140,14 @@ def api_customer(request, id):
                 status=400
             )
     else:
-        count, _ = Customer.objects.filter(id=id).delete()
-        return JsonResponse({'Deleted': count > 0})
+        try:
+            count, _ = Customer.objects.get(id=id).delete()
+            return JsonResponse({'Deleted': count > 0})
+        except Customer.DoesNotExist:
+            return JsonResponse(
+                {'message': 'Invalid customer id'},
+                status=400
+            )
 
 
 @require_http_methods(["GET", "POST"])
@@ -192,15 +205,20 @@ def api_sales_record(request, id):
                 status=400
             )
     else:
-        count, _ = Sale_Record.objects.filter(id=id).delete()
-        return JsonResponse({'Deleted': count > 0})
+        try:
+            count, _ = Sale_Record.objects.get(id=id).delete()
+            return JsonResponse({'Deleted': count > 0})
+        except Sale_Record.DoesNotExist:
+            return JsonResponse(
+                {'message': 'Invalid sales_record id'},
+                status=400
+            )
 
 
 # endregion
 
+
 # Test API DELETE-LATER
-
-
 def api_automobile(request):
     vo = AutomobileVO.objects.all()
     return JsonResponse({'vo': vo}, encoder=AutomobileVOEncoder, safe=False)
