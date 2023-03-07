@@ -20,6 +20,12 @@ class Sales_Person(models.Model):
     name = models.CharField(max_length=200)
     employee_number = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.name
+
+    def get_api_url(self):
+        return reverse('api_show_sales_person', kwargs={'id': self.id})
+
 
 class Customer(models.Model):
     name = models.CharField(max_length=200)
