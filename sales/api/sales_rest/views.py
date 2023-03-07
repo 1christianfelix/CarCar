@@ -21,7 +21,7 @@ class AutomobileVOEncoder(ModelEncoder):
         'color',
         'year',
         'vin',
-        "for_sale",
+        "sold",
     ]
 
 
@@ -124,7 +124,7 @@ def api_customers(request):
         except TypeError as e:
             invalid_arg = str(e).split("'")[1]
             return JsonResponse(
-                {"Invalid argument": f'Cannot create customer with argument: ({invalid_arg})'}, status=400
+                {"message": f'Cannot create customer with argument: ({invalid_arg})'}, status=400
             )
 
 
@@ -163,18 +163,25 @@ def api_sales_records(request):
         try:
             content = json.loads(request.body)
             automobile = AutomobileVO.objects.get(
-                import_href=content['automobile'])
+                vin=content['automobile'])
+
+            if automobile.sold == True:
+                return JsonResponse(
+                    {"message" : "Cannot sell. Car already sold."}, status=400
+                )
+
             sales_person = Sales_Person.objects.get(
                 name=content["sales_person"])
             customer = Customer.objects.get(name=content["customer"])
+
+            automobile.sold = True
+            automobile.save();
 
             content['automobile'] = automobile
             content['sales_person'] = sales_person
             content['customer'] = customer
 
             # Selling the automobile
-            automobile.for_sale = False
-            automobile.save();
             sales_record = Sale_Record.objects.create(**content)
             return JsonResponse(
                 sales_record, encoder=Sales_RecordEncoder, safe=False
@@ -182,17 +189,17 @@ def api_sales_records(request):
 
         except AutomobileVO.DoesNotExist:
             return JsonResponse(
-                {'Invalid argument': 'Automobile reference does not exist'},
+                {'message': 'Automobile reference does not exist'},
                 status=400
             )
         except Sales_Person.DoesNotExist:
             return JsonResponse(
-                {'Invalid argument': 'Sales_Person does not exist'},
+                {'message': 'Sales_Person does not exist'},
                 status=400
             )
         except Customer.DoesNotExist:
             return JsonResponse(
-                {'Invalid argument': 'Customer does not exist'},
+                {'message': 'Customer does not exist'},
                 status=400
             )
 
