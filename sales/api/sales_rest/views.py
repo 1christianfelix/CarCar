@@ -62,7 +62,7 @@ class Sales_RecordEncoder(ModelEncoder):
 
 
 @require_http_methods(["GET", "POST"])
-def api_list_sales_people(request):
+def api_sales_persons(request):
     # GET
     if request.method == "GET":
         sales_people = Sales_Person.objects.all()
@@ -82,7 +82,7 @@ def api_list_sales_people(request):
 
 
 @require_http_methods(["GET", "DELETE"])
-def api_show_sales_person(request, id):
+def api_sales_person(request, id):
     # GET
     if request.method == "GET":
         sales_person = Sales_Person.objects.get(id=id)
@@ -95,7 +95,7 @@ def api_show_sales_person(request, id):
 
 
 @require_http_methods(["GET", "POST"])
-def api_list_customers(request):
+def api_customers(request):
     # GET
     if request.method == "GET":
         customers = Customer.objects.all()
@@ -115,7 +115,7 @@ def api_list_customers(request):
 
 
 @require_http_methods(["GET", "POST"])
-def api_list_sales_record(request):
+def api_sales_records(request):
     # GET
     if request.method == "GET":
         sales_record = Sale_Record.objects.all()
