@@ -24,7 +24,7 @@ class Sales_Person(models.Model):
         return self.name
 
     def get_api_url(self):
-        return reverse('api_show_sales_person', kwargs={'id': self.id})
+        return reverse('api_sales_person', kwargs={'id': self.id})
 
 
 class Customer(models.Model):
@@ -36,7 +36,7 @@ class Customer(models.Model):
         return self.name
 
     def get_api_url(self):
-        return reverse('api_show_customer', kwargs={'id': self.id})
+        return reverse('api_customer', kwargs={'id': self.id})
 
 
 class Sale_Record(models.Model):
@@ -59,3 +59,9 @@ class Sale_Record(models.Model):
         related_name="sale_record",
         on_delete=models.CASCADE,
     )
+
+    def __str__(self):
+        return self.id
+
+    def get_api_url(self):
+        return reverse('api_sales_record', kwargs={'id': self.id})

@@ -73,20 +73,26 @@ def api_sales_persons(request):
         try:
             content = json.loads(request.body)
             sales_person = Sales_Person.objects.create(**content)
+            return JsonResponse(sales_person, encoder=Sales_PersonEncoder, safe=False)
         except TypeError as e:
             invalid_arg = str(e).split("'")[1]
             return JsonResponse(
                 {"Invalid argument": f'Cannot create sales_person with argument: ({invalid_arg})'}, status=400
             )
-        return JsonResponse(sales_person, encoder=Sales_PersonEncoder, safe=False)
 
 
 @require_http_methods(["GET", "DELETE"])
 def api_sales_person(request, id):
     # GET
     if request.method == "GET":
-        sales_person = Sales_Person.objects.get(id=id)
-        return JsonResponse(sales_person, encoder=Sales_PersonEncoder, safe=False)
+        try:
+            sales_person = Sales_Person.objects.get(id=id)
+            return JsonResponse(sales_person, encoder=Sales_PersonEncoder, safe=False)
+        except Sales_Person.DoesNotExist:
+            return JsonResponse(
+                {'message': 'Invalid sales_person id'},
+                status=400
+            )
 
     # DELETE
     else:
@@ -106,12 +112,29 @@ def api_customers(request):
         try:
             content = json.loads(request.body)
             customer = Customer.objects.create(**content)
+            return JsonResponse(customer, encoder=CustomerEncoder, safe=False)
         except TypeError as e:
             invalid_arg = str(e).split("'")[1]
             return JsonResponse(
                 {"Invalid argument": f'Cannot create customer with argument: ({invalid_arg})'}, status=400
             )
-        return JsonResponse(customer, encoder=CustomerEncoder, safe=False)
+
+
+@require_http_methods(["GET", "DELETE"])
+def api_customer(request, id):
+    # GET
+    if request.method == "GET":
+        try:
+            customer = Customer.objects.get(id=id)
+            return JsonResponse(customer, encoder=CustomerEncoder, safe=False)
+        except Customer.DoesNotExist:
+            return JsonResponse(
+                {'message': 'Invalid customer id'},
+                status=400
+            )
+    else:
+        count, _ = Customer.objects.filter(id=id).delete()
+        return JsonResponse({'Deleted': count > 0})
 
 
 @require_http_methods(["GET", "POST"])
@@ -135,6 +158,11 @@ def api_sales_records(request):
             content['sales_person'] = sales_person
             content['customer'] = customer
 
+            sales_record = Sale_Record.objects.create(**content)
+            return JsonResponse(
+                sales_record, encoder=Sales_RecordEncoder, safe=False
+            )
+
         except AutomobileVO.DoesNotExist:
             return JsonResponse(
                 {'Invalid argument': 'Automobile reference does not exist'},
@@ -151,10 +179,23 @@ def api_sales_records(request):
                 status=400
             )
 
-        sales_record = Sale_Record.objects.create(**content)
-        return JsonResponse(
-            sales_record, encoder=Sales_RecordEncoder, safe=False
-        )
+
+@require_http_methods(["GET", "DELETE"])
+def api_sales_record(request, id):
+    if request.method == "GET":
+        try:
+            record = Sale_Record.objects.get(id=id)
+            return JsonResponse(record, encoder=Sales_RecordEncoder, safe=False)
+        except Sale_Record.DoesNotExist:
+            return JsonResponse(
+                {'message': 'Invalid sales_record id'},
+                status=400
+            )
+    else:
+        count, _ = Sale_Record.objects.filter(id=id).delete()
+        return JsonResponse({'Deleted': count > 0})
+
+
 # endregion
 
 # Test API DELETE-LATER
