@@ -27,9 +27,22 @@ The back-end functionality encompasses creating appointments and technicians, al
 To further enhance the user experience, the application integrates with an inventory microservice that leverages the VIN to verify whether the automobile has been sold by the dealership.
 
 ## Sales microservice
+### General Overview
+The sales application allows users to manage and view data surrounding sales:
+- Add Customers and new Sales People through forms
+- Record and track the history of sales between Customer, Sales Person, and the Automobile
+- Filter the history of sales records by sales person
 
-Explain your models and integration with the inventory
-microservice, here.
+#### Front-End
+The front-end interface of the Sales service provides the user with forms to add Sales People, Customers, and create Sale Records. Some forms contain dropdown menus that allow the user to identify and use known records.  
+
+The user also has access to view a detailed list of all sales records or records by a certain sales person.
+
+#### Back-End
+Every model in the back-end has a relationship with the Sales Record model. The sales service also utilizes data from the inventory service in order to create relationships between sales records and automobiles. This data was fetched through polling and uniquely identified by VIN numbers. 
+
+For each model, there exist a view to create, delete, and list.
+ 
 
 ## How to run the application
 
