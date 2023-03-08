@@ -46,7 +46,6 @@ To further enhance the user experience, the application integrates with an inven
 | Show Technician Details | GET    | http://localhost:8080/api/technicians/:id/ |
 
 
-
 ## Sales microservice
 ### General Overview
 The sales application allows users to manage and view data surrounding sales:
@@ -73,12 +72,136 @@ For each model, there exist a view to create, delete, and list.
 | Create a Sales Person | POST   | http://localhost:8090/api/sales_person/     |
 | Delete a Sales Person | DELETE | http://localhost:8090/api/sales_person/:id/ |
 
+<details>
+<summary><strong>List Sales People Output</strong></summary>
+<br>
+
+#### Output:
+```
+{
+	"sales_people": [
+		{
+			"href": "/api/sales_person/1/",
+			"name": "Christian Felix",
+			"employee_number": "1"
+		},
+		{
+			"href": "/api/sales_person/2/",
+			"name": "Jeff",
+			"employee_number": "2"
+		},
+    ]
+}
+```
+</details>
+
+<details>
+<summary><strong>Create Sales People Input/Output</strong></summary>
+<br>
+
+#### Input:
+```
+{
+	"name": "Daveip",
+	"employee_number": "4"
+}
+```
+#### Output:
+```
+{
+	"href": "/api/sales_person/4/",
+	"name": "Daveip",
+	"employee_number": "4"
+}
+```
+</details>
+
+<details>
+<summary><strong>Delete Sales Person Output</strong></summary>
+<br>
+
+#### Output:
+```
+{
+	"Deleted": true
+}
+```
+</details>
+
+
 ### Customer
 | Action            | Method | URL                                   |
 |-------------------|--------|---------------------------------------|
 | List Customers    | GET    | http://localhost:8090/api/customer/   |
 | Create a Custom   | POST   | http://localhost:8090/api/customer/   |
 | Delete a Customer | DELETE | http://localhost:8090/api/customer/:id/ |
+
+<details>
+<summary><strong>List Customer Output</strong></summary>
+<br>
+
+#### Output:
+```
+{
+	"customers": [
+		{
+			"href": "/api/customer/1/",
+			"name": "John John",
+			"address": "1",
+			"phone_number": "111-222-3333"
+		},
+		{
+			"href": "/api/customer/2/",
+			"name": "Kyle",
+			"address": "123 Kyle's house",
+			"phone_number": "123-123-1234"
+		},
+		{
+			"href": "/api/customer/3/",
+			"name": "billy",
+			"address": "2",
+			"phone_number": "111-222-3333"
+		}
+	]
+}
+```
+</details>
+
+<details>
+<summary><strong>Create Customer Input/Output</strong></summary>
+<br>
+
+#### Input:
+```
+{
+	"name": "billy",
+	"address": "2 house",
+	"phone_number": "111-222-3333"
+}
+```
+#### Output:
+```
+{
+	"href": "/api/customer/3/",
+	"name": "billy",
+	"address": "2 house",
+	"phone_number": "111-222-3333"
+}
+```
+</details>
+
+<details>
+<summary><strong>Delete Sales Person Output</strong></summary>
+<br>
+
+#### Output:
+```
+{
+	"Deleted": true
+}
+```
+</details>
+
 
 
 ### Sales Record
@@ -87,6 +210,115 @@ For each model, there exist a view to create, delete, and list.
 | List Sales Records  | GET    | http://localhost:8090/api/sales_records/     |
 | Create Sales Record | POST   | http://localhost:8090/api/sales_records/     |
 | Delete Sales Record | DELETE | http://localhost:8090/api/sales_records/:id/ |
+
+<details>
+<summary><strong>List Sales Records Output</strong></summary>
+<br>
+
+#### Output:
+```
+{
+	"sales_records": [
+		{
+			"href": "/api/sales_records/12/",
+			"sale_price": "1000",
+			"sales_person": {
+				"href": "/api/sales_person/1/",
+				"name": "Christian Felix",
+				"employee_number": "1"
+			},
+			"customer": {
+				"href": "/api/customer/1/",
+				"name": "John John",
+				"address": "1",
+				"phone_number": "111-222-3333"
+			},
+			"automobile": {
+				"import_href": "/api/automobiles/2C3CCAFJ7CH100286/",
+				"color": "black",
+				"year": 2023,
+				"vin": "2C3CCAFJ7CH100286",
+				"sold": true
+			}
+		},
+		{
+			"href": "/api/sales_records/13/",
+			"sale_price": "6",
+			"sales_person": {
+				"href": "/api/sales_person/1/",
+				"name": "Christian Felix",
+				"employee_number": "1"
+			},
+			"customer": {
+				"href": "/api/customer/1/",
+				"name": "John John",
+				"address": "1",
+				"phone_number": "111-222-3333"
+			},
+			"automobile": {
+				"import_href": "/api/automobiles/3C3CCAFJ7CH100286/",
+				"color": "black",
+				"year": 2020,
+				"vin": "3C3CCAFJ7CH100286",
+				"sold": true
+			}
+		},
+    ]
+}
+```
+</details>
+
+<details>
+<summary><strong>Create Sales Record Input/Output</strong></summary>
+<br>
+
+#### Input:
+```
+{
+	"sale_price": "40000",
+	"sales_person": "Jeff",
+	"customer": "billy",
+	"automobile": "8y7u7y7u7y7u7y7u7"
+}
+```
+#### Output:
+```
+{
+	"href": "/api/sales_records/23/",
+	"sale_price": "40000",
+	"sales_person": {
+		"href": "/api/sales_person/2/",
+		"name": "Jeff",
+		"employee_number": "2"
+	},
+	"customer": {
+		"href": "/api/customer/3/",
+		"name": "billy",
+		"address": "2",
+		"phone_number": "111-222-3333"
+	},
+	"automobile": {
+		"import_href": "/api/automobiles/8y7u7y7u7y7u7y7u7/",
+		"color": "teal",
+		"year": 1988,
+		"vin": "8y7u7y7u7y7u7y7u7",
+		"sold": true
+	}
+}
+```
+</details>
+
+<details>
+<summary><strong>Delete Sales Record Output</strong></summary>
+<br>
+
+#### Output:
+```
+{
+	"Deleted": true
+}
+```
+</details>
 
 
 ## How to run the application
