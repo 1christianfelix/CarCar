@@ -78,7 +78,7 @@ For each model, there exist a view to create, delete, and list.
 |-------------------|--------|---------------------------------------|
 | List Customers    | GET    | http://localhost:8090/api/customer/   |
 | Create a Custom   | POST   | http://localhost:8090/api/customer/   |
-| Delete a Customer | DELETE | http://localhost:8090/api/customer/1/ |
+| Delete a Customer | DELETE | http://localhost:8090/api/customer/:id/ |
 
 
 ### Sales Record
