@@ -520,7 +520,7 @@ The inventory service provides users the ability to create/update, delete, list,
 <summary><strong>Listing Manufacturer Output</strong></summary>
 <br>
 
-#### Input:
+#### Output:
 ```
 {
   "manufacturers": [
