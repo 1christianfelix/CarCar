@@ -10,6 +10,29 @@ Team:
 ![Project CarCar design](https://gitlab.com/1christianfelix1/project-beta/-/raw/main/smaller%20diagram%20carcar.png)
 
 
+## How to run the application
+
+1. Clone the repository:  
+https://gitlab.com/1christianfelix1/project-beta
+
+2. Run Docker and run the following commands to build and start the Docker container
+```
+docker volume create beta-data
+docker-compose build
+docker-compose up
+
+```
+3. Make and apply migrations
+```
+docker exec -it «api-container-name» bash
+python manage.py makemigrations
+python manage.py migrate
+
+```
+4. Once everything is loaded, you can view the application at:  
+http://localhost:3000/
+
+
 ## Service microservice
 ### General Overview
 
@@ -424,25 +447,3 @@ For each model, there exist a view to create, delete, and list.
 ```
 </details>
 
-
-## How to run the application
-
-1. Clone the repository:  
-https://gitlab.com/1christianfelix1/project-beta
-
-2. Run Docker and run the following commands to build and start the Docker container
-```
-docker volume create beta-data
-docker-compose build
-docker-compose up
-
-```
-3. Make and apply migrations
-```
-docker exec -it «api-container-name» bash
-python manage.py makemigrations
-python manage.py migrate
-
-```
-4. Once everything is loaded, you can view the application at:  
-http://localhost:3000/
