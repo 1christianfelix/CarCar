@@ -33,7 +33,6 @@ const SalesRecordList = (props) => {
     const handleSalesPersonChange = (event) => {
       const value = event.target.value
       let filteredList = allSales.filter((record) => {return record['sales_person']['href']==value})
-      console.log(filteredList)
       setSalesPerson(value)
       setSalesRecords(filteredList)
     }
@@ -52,7 +51,6 @@ const SalesRecordList = (props) => {
     listRecord = "table table-striped"
     tableName = `Displaying records for employee: ${salesPerson.match(/(\d+)/)[0]}`
    }
-   console.log(listAll)
 
   return (
     <div className="row">

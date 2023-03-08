@@ -34,8 +34,6 @@ const SalesPersonForm = () => {
 
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
-      const test = await response.json();
-      console.log(test);
       setName("");
       setEmployeeNumber("");
     }

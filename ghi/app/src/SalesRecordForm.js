@@ -28,7 +28,6 @@ const SalesRecordForm = (props) => {
       setCustomers(customerData["customers"]);
       let filteredList = []
       autoVOData["AutoVO"].forEach(auto => {if(auto.sold == false) filteredList.push(auto.vin)})
-      console.log(filteredList)
       setForSale(filteredList)
     }
   };
@@ -86,8 +85,6 @@ const SalesRecordForm = (props) => {
 
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
-      const test1 = await response.json();
-      console.log(test1);
       setAutomobile("");
       setSalesPerson("");
       setCustomer("");
