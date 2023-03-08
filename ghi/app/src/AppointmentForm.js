@@ -35,10 +35,10 @@ const AppointmentForm = () => {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 
-		const date_time = dateTime;
+		const date_and_time = dateTime;
 		const technician = selectedTechnician;
 
-		const data = { vin, owner, date_time, technician, reason };
+		const data = { vin, owner, date_and_time, technician, reason };
 
 		const appointmentUrl = "http://localhost:8080/api/appointments/";
 		const fetchConfig = {

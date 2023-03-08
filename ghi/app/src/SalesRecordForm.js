@@ -6,7 +6,6 @@ const SalesRecordForm = (props) => {
   const [automobiles, setAutomobiles] = useState(props.automobile_list);
   const [salesPersons, setSalesPersons] = useState([]);
   const [customers, setCustomers] = useState([]);
-  const [autoVOs, setAutoVOs] = useState([]);
   const [warning, setWarning] = useState('');
   const [alert, setAlert] = useState('d-none');
   const [forSale, setForSale] = useState([]);
@@ -27,7 +26,7 @@ const SalesRecordForm = (props) => {
       setSalesPersons(salesPersonData["sales_people"]);
       setCustomers(customerData["customers"]);
       let filteredList = []
-      autoVOData["AutoVO"].forEach(auto => {if(auto.sold == false) filteredList.push(auto.vin)})
+      autoVOData["AutoVO"].forEach(auto => {if(auto.sold === false) filteredList.push(auto.vin)})
       setForSale(filteredList)
     }
   };

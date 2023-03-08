@@ -32,7 +32,7 @@ const SalesRecordList = (props) => {
 
     const handleSalesPersonChange = (event) => {
       const value = event.target.value
-      let filteredList = allSales.filter((record) => {return record['sales_person']['href']==value})
+      let filteredList = allSales.filter((record) => {return record['sales_person']['href']===value})
       setSalesPerson(value)
       setSalesRecords(filteredList)
     }
@@ -42,7 +42,7 @@ const SalesRecordList = (props) => {
   let listAll = 'table table-striped'
   let listRecord = 'table table-striped'
   let tableName = 'Displaying all records'
-  if(salesPerson == ''){
+  if(salesPerson === ''){
     listAll = "table table-striped"
     listRecord = "table table-striped d-none"
     tableName = 'Displaying all records'

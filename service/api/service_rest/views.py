@@ -96,7 +96,8 @@ def show_appointment(request, id):
             return response
     elif request.method == "DELETE":
         try:
-            appointment = Appointment.objects.get(id=id),appointment.delete()
+            appointment = Appointment.objects.get(id=id)
+            appointment.delete()
             return JsonResponse(
                 {"message": "Appointment deleted"}
             )
@@ -108,8 +109,9 @@ def show_appointment(request, id):
             return response
     else:
         content = json.loads(request.body)
-        Appointment.objects.get(id=id).update(*content)
-        appointment = Appointment.objects.filter(id=id)
+        print(content)
+        Appointment.objects.update_or_create(id=id, defaults={'finished': content['finished']})
+        appointment = Appointment.objects.get(id=id)
         return JsonResponse(
             appointment,
             encoder=AppointmentEncoder,
