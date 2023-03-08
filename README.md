@@ -27,11 +27,25 @@ The back-end functionality encompasses creating appointments and technicians, al
 To further enhance the user experience, the application integrates with an inventory microservice that leverages the VIN to verify whether the automobile has been sold by the dealership.
 
  ### RestFul API (PORT 8080):
-| Action | Method | URL | Notes |
-| ------ | ------ | --- | ----- |
-|        |        |     |       |
-|        |        |     |       |
-|        |        |     |       |
+ #### Appointments
+| Action                   | Method | URL                                                     |
+|--------------------------|--------|---------------------------------------------------------|
+| List All Appointments    | GET    | http://localhost:8080/api/appointments/                 |
+| List Appointments by VIN | GET    | http://localhost:8080/api/appointments/<str:vin>/       |
+| Create Appointment       | POST   | http://localhost:8080/api/appointments/<str:vin>/       |
+| Delete Appointment       | DELETE | http://localhost:8080/api/appointments/detail/<int:id>/ |
+| Update Appointment       | PUT    | http://localhost:8080/api/appointments/detail/<int:id>/ |
+| Show Appointment Details | GET    | http://localhost:8080/api/appointments/detail/<int:id>/ |
+
+
+### Technicians:
+| Action                  | Method | URL                                        |
+|-------------------------|--------|--------------------------------------------|
+| List Technicians        | GET    | http://localhost:8080/api/technicians/     |
+| Create a Technician     | POST   | http://localhost:8080/api/technicians/     |
+| Show Technician Details | GET    | http://localhost:8080/api/technicians/:id/ |
+
+
 
 ## Sales microservice
 ### General Overview
