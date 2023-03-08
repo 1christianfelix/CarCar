@@ -78,7 +78,7 @@ def api_sales_persons(request):
         except TypeError as e:
             invalid_arg = str(e).split("'")[1]
             return JsonResponse(
-                {"Invalid argument": f'Cannot create sales_person with argument: ({invalid_arg})'}, status=400
+                {"message": f'Cannot create sales_person with argument: ({invalid_arg})'}, status=400
             )
 
 
@@ -232,4 +232,4 @@ def api_sales_record(request, id):
 # Test API DELETE-LATER
 def api_automobile(request):
     vo = AutomobileVO.objects.all()
-    return JsonResponse({'vo': vo}, encoder=AutomobileVOEncoder, safe=False)
+    return JsonResponse({'AutoVO': vo}, encoder=AutomobileVOEncoder, safe=False)

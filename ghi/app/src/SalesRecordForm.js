@@ -6,21 +6,30 @@ const SalesRecordForm = (props) => {
   const [automobiles, setAutomobiles] = useState(props.automobile_list);
   const [salesPersons, setSalesPersons] = useState([]);
   const [customers, setCustomers] = useState([]);
+  const [autoVOs, setAutoVOs] = useState([]);
   const [warning, setWarning] = useState('');
   const [alert, setAlert] = useState('d-none');
+  const [forSale, setForSale] = useState([]);
 
 
-  // Fetcing SalesPersons and Customers list
+
+  // Fetching SalesPersons and Customers list
   const fetchData = async () => {
     const salesPersonRes = await fetch(
       "http://localhost:8090/api/sales_person/"
     );
     const customerRes = await fetch("http://localhost:8090/api/customer/");
-    if (salesPersonRes.ok && customerRes.ok) {
+    const autoVORes = await fetch("http://localhost:8090/api/automobileVO/")
+    if (salesPersonRes.ok && customerRes.ok && autoVORes) {
       const salesPersonData = await salesPersonRes.json();
       const customerData = await customerRes.json();
+      const autoVOData = await autoVORes.json();
       setSalesPersons(salesPersonData["sales_people"]);
       setCustomers(customerData["customers"]);
+      let filteredList = []
+      autoVOData["AutoVO"].forEach(auto => {if(auto.sold == false) filteredList.push(auto.vin)})
+      console.log(filteredList)
+      setForSale(filteredList)
     }
   };
 
@@ -35,9 +44,11 @@ const SalesRecordForm = (props) => {
   const [salePrice, setSalePrice] = useState("");
 
   //#region : Handler Functions
+  let vinTarget = null
   const handleAutomobile = (event) => {
     const value = event.target.value;
     setAutomobile(value);
+    vinTarget = value
   };
   const handleSalesPerson = (event) => {
     const value = event.target.value;
@@ -83,6 +94,11 @@ const SalesRecordForm = (props) => {
       setSalePrice("");
       setWarning("")
       setAlert("alert alert-info offset-3 col-6 mb-0 text-center")
+      setForSale((prevState)=>{
+        let index = prevState.indexOf(vinTarget)
+        prevState.splice(index,1)
+        return prevState
+      })
     }
     else {
       let responseMessage = await response.json();
@@ -110,8 +126,10 @@ const SalesRecordForm = (props) => {
                   value={automobile}
                   onChange={handleAutomobile}
                 >
-                  <option value="">Choose an automobile</option>
-                  {automobiles.map((automobile) => {
+                  <option value="">{forSale.length ? 'Choose an automobile' : 'Inventory is either empty or completely sold out'}</option>
+                  {automobiles.filter((auto)=>{
+                    return forSale.includes(auto.vin)
+                  }).map((automobile) => {
                     return (
                       <option key={automobile["vin"]} value={automobile["vin"]}>
                         {automobile.name} {automobile.year}{" "}
