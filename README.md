@@ -7,7 +7,7 @@ Team:
 
 ## Design
 #### Project Diagram
-<img src="https://gitlab.com/1christianfelix1/project-beta/-/raw/main/project%20beta%20excalidraw.png" alt= “ProjectDesign” width="483px" height="665px">
+![Project CarCar design](https://gitlab.com/1christianfelix1/project-beta/-/raw/main/smaller%20diagram%20carcar.png)
 
 
 ## Service microservice
