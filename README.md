@@ -31,11 +31,61 @@ To further enhance the user experience, the application integrates with an inven
 | Action                   | Method | URL                                                     |
 |--------------------------|--------|---------------------------------------------------------|
 | List All Appointments    | GET    | http://localhost:8080/api/appointments/                 |
-| List Appointments by VIN | GET    | http://localhost:8080/api/appointments/<str:vin>/       |
-| Create Appointment       | POST   | http://localhost:8080/api/appointments/<str:vin>/       |
-| Delete Appointment       | DELETE | http://localhost:8080/api/appointments/detail/<int:id>/ |
-| Update Appointment       | PUT    | http://localhost:8080/api/appointments/detail/<int:id>/ |
-| Show Appointment Details | GET    | http://localhost:8080/api/appointments/detail/<int:id>/ |
+
+<details>
+<summary><strong>List Appointments Output</strong></summary>
+<br>
+
+#### Output:
+```
+{
+	"appointments": [
+		{
+			"id": 2,
+			"vin": "JT2BB5BA8BCBZRU2Z",
+			"owner": "bob",
+			"date_and_time": "2023-03-10T23:42:00+00:00",
+			"technician": {
+				"name": "sdfsf",
+				"id": 1,
+				"employee_number": 32
+			},
+			"reason": "sdasd",
+			"vip": false,
+			"finished": true
+		},
+		{
+			"id": 3,
+			"vin": "JT2BB5BA8BCBZRU2Z",
+			"owner": "da",
+			"date_and_time": "2023-03-03T22:51:00+00:00",
+			"technician": {
+				"name": "sdfsf",
+				"id": 1,
+				"employee_number": 32
+			},
+			"reason": "wqeq",
+			"vip": false,
+			"finished": true
+		},
+		{
+			"id": 4,
+			"vin": "JT2BB5BA8BCBZRU2Z",
+			"owner": "bob",
+			"date_and_time": "2023-03-08T09:53:00+00:00",
+			"technician": {
+				"name": "sdfsf",
+				"id": 1,
+				"employee_number": 32
+			},
+			"reason": "ewrwer",
+			"vip": false,
+			"finished": true
+		}
+	]
+}
+```
+</details>
 
 
 ### Technicians:
@@ -44,6 +94,60 @@ To further enhance the user experience, the application integrates with an inven
 | List Technicians        | GET    | http://localhost:8080/api/technicians/     |
 | Create a Technician     | POST   | http://localhost:8080/api/technicians/     |
 | Show Technician Details | GET    | http://localhost:8080/api/technicians/:id/ |
+
+<details>
+<summary><strong>List Technicians Output</strong></summary>
+<br>
+
+#### Output:
+```
+{
+	"technicians": [
+		{
+			"name": "sdfsf",
+			"id": 1,
+			"employee_number": 32
+		}
+	]
+}
+```
+</details>
+
+<details>
+<summary><strong>Create Technician Input/Output</strong></summary>
+<br>
+
+#### Input:
+```
+{
+	"name": "bob",
+	"employee_number": 1891
+}
+```
+
+#### Output:
+```
+{
+	"name": "bob",
+	"id": 2,
+	"employee_number": 1891
+}
+```
+</details>
+
+<details>
+<summary><strong>Show Technicians Details Output</strong></summary>
+<br>
+
+#### Output:
+```
+{
+	"name": "sdfsf",
+	"id": 1,
+	"employee_number": 32
+}
+```
+</details>
 
 
 ## Sales microservice
