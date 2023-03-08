@@ -26,6 +26,13 @@ The back-end functionality encompasses creating appointments and technicians, al
 
 To further enhance the user experience, the application integrates with an inventory microservice that leverages the VIN to verify whether the automobile has been sold by the dealership.
 
+ ### RestFul API (PORT 8080):
+| Action | Method | URL | Notes |
+| ------ | ------ | --- | ----- |
+|        |        |     |       |
+|        |        |     |       |
+|        |        |     |       |
+
 ## Sales microservice
 ### General Overview
 The sales application allows users to manage and view data surrounding sales:
@@ -43,6 +50,30 @@ Every model in the back-end has a relationship with the Sales Record model. The 
 
 For each model, there exist a view to create, delete, and list.
  
+
+ ### RestFul API (PORT 8090):
+ #### Sales Person:
+| Action                | Method | URL                                         |
+|-----------------------|--------|---------------------------------------------|
+| List Sales People     | GET    | http://localhost:8090/api/sales_person/     |
+| Create a Sales Person | POST   | http://localhost:8090/api/sales_person/     |
+| Delete a Sales Person | DELETE | http://localhost:8090/api/sales_person/:id/ |
+
+### Customer
+| Action            | Method | URL                                   |
+|-------------------|--------|---------------------------------------|
+| List Customers    | GET    | http://localhost:8090/api/customer/   |
+| Create a Custom   | POST   | http://localhost:8090/api/customer/   |
+| Delete a Customer | DELETE | http://localhost:8090/api/customer/1/ |
+
+
+### Sales Record
+| Action              | Method | URL                                          |
+|---------------------|--------|----------------------------------------------|
+| List Sales Records  | GET    | http://localhost:8090/api/sales_records/     |
+| Create Sales Record | POST   | http://localhost:8090/api/sales_records/     |
+| Delete Sales Record | DELETE | http://localhost:8090/api/sales_records/:id/ |
+
 
 ## How to run the application
 
