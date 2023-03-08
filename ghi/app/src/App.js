@@ -10,8 +10,13 @@ import VehicleForm from "./VehicleForm";
 import VehicleList from "./VehicleList";
 import AutomobileForm from "./AutomobileForm";
 import AutomobileList from "./AutomobileList";
-import ManufacturerList from "./ManufacturerList"
-import ManufacturerForm from "./ManufacturerForm"
+import ManufacturerList from "./ManufacturerList";
+import ManufacturerForm from "./ManufacturerForm";
+import AppointmentForm from "./AppointmentForm";
+import AppointmentList from "./AppointmentList";
+import TechnicianForm from "./TechnicianForm";
+import ServiceHistory from "./ServiceHistory";
+
 
 
 function App(props) {
@@ -24,6 +29,7 @@ function App(props) {
     <BrowserRouter>
       <Nav />
       <div className="container">
+        {/* Sales */}
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="sales_person">
@@ -39,6 +45,24 @@ function App(props) {
               element={<SalesRecordForm automobile_list={automobile_list} />}
             />
           </Route>
+
+          {/* Services */}
+          <Route path="appointment">
+            <Route index element={<AppointmentList/>} />
+            <Route
+              path="new"
+              element={<AppointmentForm/>}
+            />
+          </Route>
+          <Route path="technician">
+            <Route index element={<TechnicianForm />} />
+          </Route>
+          <Route path="service_history">
+            <Route index element={<ServiceHistory />} />
+          </Route>
+
+
+          {/* Inventory */}
           <Route path="vehicle">
             <Route index element={<VehicleList vehicle_list={vehicle_list} />} />
             <Route
@@ -60,6 +84,8 @@ function App(props) {
               element={<ManufacturerForm />}
             />
           </Route>
+
+
         </Routes>
       </div>
     </BrowserRouter>
