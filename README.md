@@ -505,7 +505,7 @@ The inventory service provides users the ability to create/update, delete, list,
 <summary><strong>Create, Update, Getting a specific Manufacturer Output</strong></summary>
 <br>
 
-#### Input:
+#### Output:
 ```
 {
   "href": "/api/manufacturers/1/",
@@ -533,3 +533,237 @@ The inventory service provides users the ability to create/update, delete, list,
 }
 ```
 </details>
+
+#### VehicleModels
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Method</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>List vehicle models</td>
+<td>GET</td>
+<td><code tabindex="0">http://localhost:8100/api/models/</code></td>
+</tr>
+<tr>
+<td>Create a vehicle model</td>
+<td>POST</td>
+<td><code tabindex="0">http://localhost:8100/api/models/</code></td>
+</tr>
+<tr>
+<td>Get a specific vehicle model</td>
+<td>GET</td>
+<td><code tabindex="0">http://localhost:8100/api/models/:id/</code></td>
+</tr>
+<tr>
+<td>Update a specific vehicle model</td>
+<td>PUT</td>
+<td><code tabindex="0">http://localhost:8100/api/models/:id/</code></td>
+</tr>
+<tr>
+<td>Delete a specific vehicle model</td>
+<td>DELETE</td>
+<td><code tabindex="0">http://localhost:8100/api/models/:id/</code></td>
+</tr>
+</tbody>
+</table>
+
+<details>
+<summary><strong>Create and Update Vehicle Input</strong></summary>
+<br>
+
+#### Input:
+```
+{
+  "name": "Sebring",
+  "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Chrysler_Sebring_front_20090302.jpg/320px-Chrysler_Sebring_front_20090302.jpg",
+  "manufacturer_id": 1
+}
+```
+</details>
+
+<details>
+<summary><strong>Updating a Vehicle Input</strong></summary>
+<br>
+
+#### Input:
+```
+{
+  "name": "Sebring",
+  "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Chrysler_Sebring_front_20090302.jpg/320px-Chrysler_Sebring_front_20090302.jpg"
+}
+```
+</details>
+
+<details>
+<summary><strong>Create, Update, Getting a specific Vehicle Model Output</strong></summary>
+<br>
+
+#### Output:
+```
+{
+  "href": "/api/models/1/",
+  "id": 1,
+  "name": "Sebring",
+  "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Chrysler_Sebring_front_20090302.jpg/320px-Chrysler_Sebring_front_20090302.jpg",
+  "manufacturer": {
+    "href": "/api/manufacturers/1/",
+    "id": 1,
+    "name": "Daimler-Chrysler"
+  }
+}
+```
+</details>
+
+<details>
+<summary><strong>Listing Vehicle Model Output</strong></summary>
+<br>
+
+#### Output:
+```
+{
+  "models": [
+    {
+      "href": "/api/models/1/",
+      "id": 1,
+      "name": "Sebring",
+      "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Chrysler_Sebring_front_20090302.jpg/320px-Chrysler_Sebring_front_20090302.jpg",
+      "manufacturer": {
+        "href": "/api/manufacturers/1/",
+        "id": 1,
+        "name": "Daimler-Chrysler"
+      }
+    }
+  ]
+}
+```
+</details>
+
+
+<table class="">
+<thead>
+<tr>
+<th>Action</th>
+<th>Method</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>List automobiles</td>
+<td>GET</td>
+<td><code tabindex="0">http://localhost:8100/api/automobiles/</code></td>
+</tr>
+<tr>
+<td>Create an automobile</td>
+<td>POST</td>
+<td><code tabindex="0">http://localhost:8100/api/automobiles/</code></td>
+</tr>
+<tr>
+<td>Get a specific automobile</td>
+<td>GET</td>
+<td><code tabindex="0">http://localhost:8100/api/automobiles/:vin/</code></td>
+</tr>
+<tr>
+<td>Update a specific automobile</td>
+<td>PUT</td>
+<td><code tabindex="0">http://localhost:8100/api/automobiles/:vin/</code></td>
+</tr>
+<tr>
+<td>Delete a specific automobile</td>
+<td>DELETE</td>
+<td><code tabindex="0">http://localhost:8100/api/automobiles/:vin/</code></td>
+</tr>
+</tbody>
+</table>
+
+<details>
+<summary><strong>Creating an Automobile Input</strong></summary>
+<br>
+
+#### Input:
+```
+{
+  "color": "red",
+  "year": 2012,
+  "vin": "1C3CC5FB2AN120174",
+  "model_id": 1
+}
+```
+</details>
+
+<details>
+<summary><strong>Getting Details of an Automobile Output</strong></summary>
+<br>
+
+#### Output:
+```
+{
+  "href": "/api/automobiles/1C3CC5FB2AN120174/",
+  "id": 1,
+  "color": "yellow",
+  "year": 2013,
+  "vin": "1C3CC5FB2AN120174",
+  "model": {
+    "href": "/api/models/1/",
+    "id": 1,
+    "name": "Sebring",
+    "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Chrysler_Sebring_front_20090302.jpg/320px-Chrysler_Sebring_front_20090302.jpg",
+    "manufacturer": {
+      "href": "/api/manufacturers/1/",
+      "id": 1,
+      "name": "Daimler-Chrysler"
+    }
+  }
+}
+```
+</details>
+
+<details>
+<summary><strong>Updating an Automobile Input</strong></summary>
+<br>
+
+#### Input:
+```
+{
+  "color": "red",
+  "year": 2012
+}
+```
+</details>
+
+<details>
+<summary><strong>Listing Automobiles Output</strong></summary>
+<br>
+
+#### Output:
+```
+{
+  "autos": [
+    {
+      "href": "/api/automobiles/1C3CC5FB2AN120174/",
+      "id": 1,
+      "color": "yellow",
+      "year": 2013,
+      "vin": "1C3CC5FB2AN120174",
+      "model": {
+        "href": "/api/models/1/",
+        "id": 1,
+        "name": "Sebring",
+        "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Chrysler_Sebring_front_20090302.jpg/320px-Chrysler_Sebring_front_20090302.jpg",
+        "manufacturer": {
+          "href": "/api/manufacturers/1/",
+          "id": 1,
+          "name": "Daimler-Chrysler"
+        }
+      }
+    }
+  ]
+}
+```
+</details>
+
