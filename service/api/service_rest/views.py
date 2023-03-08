@@ -109,7 +109,6 @@ def show_appointment(request, id):
             return response
     else:
         content = json.loads(request.body)
-        print(content)
         Appointment.objects.update_or_create(id=id, defaults={'finished': content['finished']})
         appointment = Appointment.objects.get(id=id)
         return JsonResponse(
