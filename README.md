@@ -186,7 +186,7 @@ The front-end interface of the Sales service provides the user with forms to add
 The user also has access to view a detailed list of all sales records or records by a certain sales person.
 
 #### Back-End
-Every model in the back-end has a relationship with the Sales Record model. The sales service also utilizes data from the inventory service in order to create relationships between sales records and automobiles. This data was fetched through polling, uniquely identified by VIN numbers and associated with an Automobile Value Object within the Sales microservices. 
+Every model in the back-end has a relationship with the Sales Record model. The sales service also utilizes data from the inventory service in order to create relationships between sales records and automobiles. This data was fetched by polling the Inventory API, uniquely identified by VIN numbers and ten associated with an Automobile Value Object within the Sales microservices. 
 
 For each model, there exist a view to create, delete, and list.
  
