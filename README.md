@@ -186,7 +186,7 @@ The front-end interface of the Sales service provides the user with forms to add
 The user also has access to view a detailed list of all sales records or records by a certain sales person.
 
 #### Back-End
-Every model in the back-end has a relationship with the Sales Record model. The sales service also utilizes data from the inventory service in order to create relationships between sales records and automobiles. This data was fetched through polling and uniquely identified by VIN numbers. 
+Every model in the back-end has a relationship with the Sales Record model. The sales service also utilizes data from the inventory service in order to create relationships between sales records and automobiles. This data was fetched through polling, uniquely identified by VIN numbers and associated with an Automobile Value Object within the Sales microservices. 
 
 For each model, there exist a view to create, delete, and list.
  
@@ -447,3 +447,89 @@ For each model, there exist a view to create, delete, and list.
 ```
 </details>
 
+## Inventory
+### General Overview
+The inventory service provides users the ability to create/update, delete, list, and view details for Manufacturers, VehicleModels, and Automobiles.
+
+#### Manufacturers
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Method</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>List manufacturers</td>
+<td>GET</td>
+<td><code tabindex="0">http://localhost:8100/api/manufacturers/</code></td>
+</tr>
+<tr>
+<td>Create a manufacturer</td>
+<td>POST</td>
+<td><code tabindex="0">http://localhost:8100/api/manufacturers/</code></td>
+</tr>
+<tr>
+<td>Get a specific manufacturer</td>
+<td>GET</td>
+<td><code tabindex="0">http://localhost:8100/api/manufacturers/:id/</code></td>
+</tr>
+<tr>
+<td>Update a specific manufacturer</td>
+<td>PUT</td>
+<td><code tabindex="0">http://localhost:8100/api/manufacturers/:id/</code></td>
+</tr>
+<tr>
+<td>Delete a specific manufacturer</td>
+<td>DELETE</td>
+<td><code tabindex="0">http://localhost:8100/api/manufacturers/:id/</code></td>
+</tr>
+</tbody>
+</table>
+
+<details>
+<summary><strong>Create and Update Manufacturer Input</strong></summary>
+<br>
+
+#### Input:
+```
+{
+  "name": "Chrysler"
+}
+```
+</details>
+
+<details>
+<summary><strong>Create, Update, Getting a specific Manufacturer Output</strong></summary>
+<br>
+
+#### Input:
+```
+{
+  "href": "/api/manufacturers/1/",
+  "id": 1,
+  "name": "Chrysler"
+}
+```
+</details>
+
+
+<details>
+<summary><strong>Listing Manufacturer Output</strong></summary>
+<br>
+
+#### Input:
+```
+{
+  "manufacturers": [
+    {
+      "href": "/api/manufacturers/1/",
+      "id": 1,
+      "name": "Daimler-Chrysler"
+    }
+  ]
+}
+```
+</details>
