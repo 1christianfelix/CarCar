@@ -126,7 +126,7 @@ const SalesRecordForm = (props) => {
                   value={automobile}
                   onChange={handleAutomobile}
                 >
-                  <option value="">{forSale.length ? 'Choose an automobile' : 'Inventory is either empty or completely sold out'}</option>
+                  <option value="">{forSale.length ? 'Choose an automobile' : 'No available automobiles'}</option>
                   {automobiles.filter((auto)=>{
                     return forSale.includes(auto.vin)
                   }).map((automobile) => {

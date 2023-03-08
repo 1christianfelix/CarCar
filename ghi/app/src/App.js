@@ -8,6 +8,11 @@ import SalesRecordForm from "./SalesRecordForm";
 import SalesRecordList from "./SalesRecordList";
 import VehicleForm from "./VehicleForm";
 import VehicleList from "./VehicleList";
+import AutomobileForm from "./AutomobileForm";
+import AutomobileList from "./AutomobileList";
+import ManufacturerList from "./ManufacturerList"
+import ManufacturerForm from "./ManufacturerForm"
+
 
 function App(props) {
   // Reference to inventory lsit
@@ -39,6 +44,20 @@ function App(props) {
             <Route
               path="new"
               element={<VehicleForm manufacturer_list={manufacturer_list} />}
+            />
+          </Route>
+          <Route path="automobile">
+            <Route index element={<AutomobileList/>} />
+            <Route
+              path="new"
+              element={<AutomobileForm />}
+            />
+          </Route>
+          <Route path="manufacturer">
+            <Route index element={<ManufacturerList manufacturer_list={manufacturer_list}/>} />
+            <Route
+              path="new"
+              element={<ManufacturerForm />}
             />
           </Route>
         </Routes>
