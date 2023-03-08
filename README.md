@@ -6,7 +6,8 @@ Team:
 * Christian Felix - Sales
 
 ## Design
-**Place Excalidraw DDD**
+
+![Project CarCar Design](https://gitlab.com/1christianfelix1/project-beta/-/raw/main/project%20beta%20excalidraw.png)
 
 ## Service microservice
 
