@@ -239,7 +239,7 @@ For each model, there exist a view to create, delete, and list.
 	"href": "/api/sales_person/1/",
 	"name": "Jeff",
 	"employee_number": "1",
-	"id": "1"
+	"id": 1
 }
 ```
 </details>
@@ -302,7 +302,7 @@ For each model, there exist a view to create, delete, and list.
 	"name": "billy",
 	"address": "2 house",
 	"phone_number": "111-222-3333",
-	"id": "1"
+	"id": 1
 }
 ```
 </details>
@@ -343,12 +343,14 @@ For each model, there exist a view to create, delete, and list.
 				"href": "/api/sales_person/1/",
 				"name": "Jeff",
 				"employee_number": "1"
+				"id": 1
 			},
 			"customer": {
 				"href": "/api/customer/1/",
 				"name": "billy",
 				"address": "1",
 				"phone_number": "111-222-3333"
+				"id": 1
 			},
 			"automobile": {
 				"import_href": "/api/automobiles/2C3CCAFJ7CH100286/",
@@ -385,14 +387,14 @@ For each model, there exist a view to create, delete, and list.
 		"href": "/api/sales_person/1/",
 		"name": "Jeff",
 		"employee_number": "1"
-		"id": "1"
+		"id": 1
 	},
 	"customer": {
 		"href": "/api/customer/1/",
 		"name": "billy",
 		"address": "1",
 		"phone_number": "111-222-3333"
-		"id" : "1"
+		"id": 1
 	},
 	"automobile": {
 		"import_href": "/api/automobiles/1C3CC5FB2AN120174/",
