@@ -65,7 +65,7 @@ class Sale_Record(models.Model):
     )
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
     def get_api_url(self):
         return reverse('api_sales_record', kwargs={'id': self.id})

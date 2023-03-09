@@ -29,7 +29,8 @@ class Sales_PersonEncoder(ModelEncoder):
     model = Sales_Person
     properties = [
         'name',
-        'employee_number'
+        'employee_number',
+        'id'
     ]
 
 
@@ -39,6 +40,7 @@ class CustomerEncoder(ModelEncoder):
         'name',
         'address',
         'phone_number',
+        'id'
     ]
 
 
@@ -171,8 +173,8 @@ def api_sales_records(request):
                 )
 
             sales_person = Sales_Person.objects.get(
-                name=content["sales_person"])
-            customer = Customer.objects.get(name=content["customer"])
+                id=content["sales_person"])
+            customer = Customer.objects.get(id=content["customer"])
 
             automobile.sold = True
             automobile.save();

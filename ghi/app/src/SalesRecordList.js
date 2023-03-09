@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 
 const SalesRecordList = (props) => {
   const [salesPersons, setSalesPersons] = useState([]);
-  const [salesPerson, setSalesPerson] = useState('');
-  const [salesRecords, setSalesRecords] = useState([])
+  const [salesPerson, setSalesPerson] = useState("");
+  const [salesRecords, setSalesRecords] = useState([]);
   const [allSales, setAllSales] = useState([]);
 
   const fetchData = async () => {
@@ -17,7 +17,7 @@ const SalesRecordList = (props) => {
       const salesPersonData = await salesPersonRes.json();
       const salesRecordsData = await salesRecordsRes.json();
       setSalesPersons(salesPersonData["sales_people"]);
-      setAllSales(salesRecordsData["sales_records"])
+      setAllSales(salesRecordsData["sales_records"]);
     }
   };
 
@@ -25,32 +25,32 @@ const SalesRecordList = (props) => {
     fetchData();
   }, []);
 
- // List aLL if no employee selected
-
+  // List aLL if no employee selected
 
   //#region : Handler functions
 
-    const handleSalesPersonChange = (event) => {
-      const value = event.target.value
-      let filteredList = allSales.filter((record) => {return record['sales_person']['href']===value})
-      setSalesPerson(value)
-      setSalesRecords(filteredList)
-    }
-
+  const handleSalesPersonChange = (event) => {
+    const value = +event.target.value;
+    let filteredList = allSales.filter((record) => {
+      return record["sales_person"]["id"] === value;
+    });
+    setSalesPerson(value);
+    setSalesRecords(filteredList);
+  };
 
   //#endregion
-  let listAll = 'table table-striped'
-  let listRecord = 'table table-striped'
-  let tableName = 'Displaying all records'
-  if(salesPerson === ''){
-    listAll = "table table-striped"
-    listRecord = "table table-striped d-none"
-    tableName = 'Displaying all records'
-   } else{
-    listAll = "table table-striped d-none"
-    listRecord = "table table-striped"
-    tableName = `Displaying records for employee: ${salesPerson.match(/(\d+)/)[0]}`
-   }
+  let listAll = "table table-striped";
+  let listRecord = "table table-striped";
+  let tableName = "Displaying all records";
+  if (salesPerson === "") {
+    listAll = "table table-striped";
+    listRecord = "table table-striped d-none";
+    tableName = "Displaying all records";
+  } else {
+    listAll = "table table-striped d-none";
+    listRecord = "table table-striped";
+    tableName = `Displaying records for employee: ${salesPerson}`;
+  }
 
   return (
     <div className="row">
@@ -59,8 +59,10 @@ const SalesRecordList = (props) => {
         <option value="">(All Records) - Select a sales person</option>
         {salesPersons.map((person) => {
           return (
-            <option key={person['href']} value={person['href']}>{person['name']}</option>
-          )
+            <option key={person["href"]} value={person["id"]}>
+              {person["name"]}
+            </option>
+          );
         })}
       </select>
       <h3 className="p-0">{tableName}</h3>
@@ -76,13 +78,13 @@ const SalesRecordList = (props) => {
         <tbody>
           {salesRecords.map((record) => {
             return (
-              <tr key={record['href']}>
+              <tr key={record["href"]}>
                 <td>{record.sales_person.name}</td>
                 <td>{record.customer.name}</td>
                 <td>{record.automobile.vin}</td>
                 <td>{record.sale_price}</td>
               </tr>
-            )
+            );
           })}
         </tbody>
       </table>
@@ -99,14 +101,14 @@ const SalesRecordList = (props) => {
         <tbody>
           {allSales.map((record) => {
             return (
-              <tr key={record['href']}>
+              <tr key={record["href"]}>
                 <td>{record.sales_person.name}</td>
                 <td>{record.sales_person.employee_number}</td>
                 <td>{record.customer.name}</td>
                 <td>{record.automobile.vin}</td>
                 <td>{record.sale_price}</td>
               </tr>
-            )
+            );
           })}
         </tbody>
       </table>
