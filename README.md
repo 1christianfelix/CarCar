@@ -229,16 +229,17 @@ For each model, there exist a view to create, delete, and list.
 #### Input:
 ```
 {
-	"name": "Daveip",
-	"employee_number": "4"
+	"name": "Jeff",
+	"employee_number": "1"
 }
 ```
 #### Output:
 ```
 {
-	"href": "/api/sales_person/4/",
-	"name": "Daveip",
-	"employee_number": "4"
+	"href": "/api/sales_person/1/",
+	"name": "Jeff",
+	"employee_number": "1",
+	"id": "1"
 }
 ```
 </details>
@@ -273,20 +274,8 @@ For each model, there exist a view to create, delete, and list.
 	"customers": [
 		{
 			"href": "/api/customer/1/",
-			"name": "John John",
-			"address": "1",
-			"phone_number": "111-222-3333"
-		},
-		{
-			"href": "/api/customer/2/",
-			"name": "Kyle",
-			"address": "123 Kyle's house",
-			"phone_number": "123-123-1234"
-		},
-		{
-			"href": "/api/customer/3/",
 			"name": "billy",
-			"address": "2",
+			"address": "1",
 			"phone_number": "111-222-3333"
 		}
 	]
@@ -309,10 +298,11 @@ For each model, there exist a view to create, delete, and list.
 #### Output:
 ```
 {
-	"href": "/api/customer/3/",
+	"href": "/api/customer/1/",
 	"name": "billy",
 	"address": "2 house",
-	"phone_number": "111-222-3333"
+	"phone_number": "111-222-3333",
+	"id": "1"
 }
 ```
 </details>
@@ -347,49 +337,27 @@ For each model, there exist a view to create, delete, and list.
 {
 	"sales_records": [
 		{
-			"href": "/api/sales_records/12/",
-			"sale_price": "1000",
+			"href": "/api/sales_records/1/",
+			"sale_price": "40000",
 			"sales_person": {
 				"href": "/api/sales_person/1/",
-				"name": "Christian Felix",
+				"name": "Jeff",
 				"employee_number": "1"
 			},
 			"customer": {
 				"href": "/api/customer/1/",
-				"name": "John John",
+				"name": "billy",
 				"address": "1",
 				"phone_number": "111-222-3333"
 			},
 			"automobile": {
 				"import_href": "/api/automobiles/2C3CCAFJ7CH100286/",
-				"color": "black",
-				"year": 2023,
-				"vin": "2C3CCAFJ7CH100286",
+				"color": "yellow",
+				"year": 2013,
+				"vin": "1C3CC5FB2AN120174",
 				"sold": true
 			}
-		},
-		{
-			"href": "/api/sales_records/13/",
-			"sale_price": "6",
-			"sales_person": {
-				"href": "/api/sales_person/1/",
-				"name": "Christian Felix",
-				"employee_number": "1"
-			},
-			"customer": {
-				"href": "/api/customer/1/",
-				"name": "John John",
-				"address": "1",
-				"phone_number": "111-222-3333"
-			},
-			"automobile": {
-				"import_href": "/api/automobiles/3C3CCAFJ7CH100286/",
-				"color": "black",
-				"year": 2020,
-				"vin": "3C3CCAFJ7CH100286",
-				"sold": true
-			}
-		},
+		}
     ]
 }
 ```
@@ -403,32 +371,34 @@ For each model, there exist a view to create, delete, and list.
 ```
 {
 	"sale_price": "40000",
-	"sales_person": "Jeff",
-	"customer": "billy",
-	"automobile": "8y7u7y7u7y7u7y7u7"
+	"sales_person": 1,
+	"customer": 1,
+	"automobile": "1C3CC5FB2AN120174"
 }
 ```
 #### Output:
 ```
 {
-	"href": "/api/sales_records/23/",
+	"href": "/api/sales_records/1/",
 	"sale_price": "40000",
 	"sales_person": {
-		"href": "/api/sales_person/2/",
+		"href": "/api/sales_person/1/",
 		"name": "Jeff",
-		"employee_number": "2"
+		"employee_number": "1"
+		"id": "1"
 	},
 	"customer": {
-		"href": "/api/customer/3/",
+		"href": "/api/customer/1/",
 		"name": "billy",
-		"address": "2",
+		"address": "1",
 		"phone_number": "111-222-3333"
+		"id" : "1"
 	},
 	"automobile": {
-		"import_href": "/api/automobiles/8y7u7y7u7y7u7y7u7/",
-		"color": "teal",
-		"year": 1988,
-		"vin": "8y7u7y7u7y7u7y7u7",
+		"import_href": "/api/automobiles/1C3CC5FB2AN120174/",
+		"color": "yellow",
+		"year": 2013,
+		"vin": "1C3CC5FB2AN120174",
 		"sold": true
 	}
 }
