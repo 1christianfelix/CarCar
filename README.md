@@ -49,6 +49,9 @@ The back-end functionality encompasses creating appointments and technicians, al
 
 To further enhance the user experience, the application integrates with an inventory microservice that leverages the VIN to verify whether the automobile has been sold by the dealership.
 
+##### Polling
+Every 60 seconds, the Service microservice polls the Inventory microservice for automobile updates
+
  ### RestFul API (PORT 8080):
  #### Appointments
 | Action                   | Method | URL                                                     |
@@ -187,6 +190,10 @@ The user also has access to view a detailed list of all sales records or records
 
 #### Back-End
 Every model in the back-end has a relationship with the Sales Record model. The sales service also utilizes data from the inventory service in order to create relationships between sales records and automobiles. This data was fetched by polling the Inventory API, uniquely identified by VIN numbers and ten associated with an Automobile Value Object within the Sales microservices. 
+
+
+##### Polling
+The Polling rate from Sales to Inventory has been reduced to 5 seconds from the original 60 seconds. This is to match the polling rate of the self-updating dropdown menu for automobiles when creating a Sales Record. The dropdown will reflect newly added automobiles every 5 seconds and will show a disclaimer if there are no vehicles for sale. 
 
 For each model, there exist a view to create, delete, and list.
  
