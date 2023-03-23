@@ -76,12 +76,12 @@ const AppointmentsList = () => {
 									<td>{appointment.vin}</td>
 									<td>{appointment.owner}</td>
 									<td>
-										{new Date(appointment.date_time).toLocaleDateString(
+										{new Date(appointment.date_and_time).toLocaleDateString(
 											"en-US"
 										)}
 									</td>
 									<td>
-										{new Date(appointment.date_time).toLocaleTimeString([], {
+										{new Date(appointment.date_and_time).toLocaleTimeString([], {
 											hour: "2-digit",
 											minute: "2-digit",
 										})}
