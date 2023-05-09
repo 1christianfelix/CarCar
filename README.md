@@ -13,7 +13,7 @@ Team:
 ## How to run the application
 
 1. Clone the repository:  
-https://gitlab.com/1christianfelix1/project-beta
+https://gitlab.com/1christianfelix1/car-car
 
 2. Run Docker and run the following commands to build and start the Docker container
 ```
